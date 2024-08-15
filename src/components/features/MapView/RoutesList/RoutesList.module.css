@@ -1,19 +1,19 @@
 .list {
-    width: 100%;
-    max-width: 360px;
-  }
-  
-  .listItem {
-    display: flex;
-    align-items: center;
-  }
+  width: 100%;
+  max-width: 360px;
+}
 
-  .title {
-    text-align: left;
-    width: 100%;
-  }
+.listItem {
+  display: flex;
+  align-items: center;
+}
 
-  .listHeight {
-   height: calc(100vh - 144px);
-   overflow-y: auto;
-  }
+.title {
+  text-align: left;
+  width: 100%;
+}
+
+.listHeight {
+  height: calc(100vh - 144px);
+  overflow-y: auto;
+}

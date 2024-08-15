@@ -35,7 +35,6 @@ import styles from "./RoutesList.module.css";
  *   />
  */
 
-
 interface RoutesListProps {
   readonly items: Line[];
   readonly selectedRoute?: string;
@@ -51,7 +50,7 @@ let RoutesList: FC<RoutesListProps> = ({
   onSelectRoute,
   onDeleteRoute,
   onStartDrawing,
-  isDrawing
+  isDrawing,
 }) => {
   const handleClick = useCallback(
     (item: Line) => {
@@ -69,19 +68,24 @@ let RoutesList: FC<RoutesListProps> = ({
   );
 
   return (
-    <List className={styles.list} >
+    <List className={styles.list}>
       <ListItem
-      secondaryAction={
-        <Button color="primary" onClick={onStartDrawing} sx={{textTransform: 'capitalize'}} variant="contained" >
-         {isDrawing ? 'Cancel Drawing' :  'Add Drawing' }
-        </Button>
-      }
+        secondaryAction={
+          <Button
+            color="primary"
+            onClick={onStartDrawing}
+            sx={{ textTransform: "capitalize" }}
+            variant="contained"
+          >
+            {isDrawing ? "Cancel Drawing" : "Add Drawing"}
+          </Button>
+        }
       >
         <Typography
           variant="h6"
           component="div"
           className={styles.title}
-          sx={{fontWeight: 'bold'}}
+          sx={{ fontWeight: "bold" }}
         >
           Routes
         </Typography>
@@ -92,9 +96,9 @@ let RoutesList: FC<RoutesListProps> = ({
           <p>No items to display</p>
         </ListItem>
       ) : (
-        <Box className={styles.listHeight} >
+        <Box className={styles.listHeight}>
           {items.map((item) => (
-            <Box key={item.id}  className={styles.listItem}>
+            <Box key={item.id} className={styles.listItem}>
               <ListItemButton
                 sx={{ flex: 1 }}
                 selected={selectedRoute === item.id}

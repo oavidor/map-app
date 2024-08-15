@@ -42,8 +42,15 @@ interface MapProps {
   isDrawing: boolean;
 }
 
-let Map: FC<MapProps> = ({ lines, selectedLine, onSelectLine, onAddLine, points, updatePoints, isDrawing, }) => {
-
+let Map: FC<MapProps> = ({
+  lines,
+  selectedLine,
+  onSelectLine,
+  onAddLine,
+  points,
+  updatePoints,
+  isDrawing,
+}) => {
   const handleLineSelect = useCallback(
     (line: Line) => {
       if (!isDrawing) {
@@ -81,7 +88,7 @@ let Map: FC<MapProps> = ({ lines, selectedLine, onSelectLine, onAddLine, points,
             />
           );
         })}
-          {isDrawing && (
+        {isDrawing && (
           <MapEventHandler
             points={points}
             updatePoints={updatePoints}

@@ -3,7 +3,7 @@ import { useMapEvents } from "react-leaflet";
 import { LatLngTuple, LatLngExpression } from "leaflet";
 import _ from "lodash";
 import { Line } from "@app/models";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * MapEventHandler - A component that handles map events for drawing lines.
@@ -64,6 +64,6 @@ let MapEventHandler: FC<MapEventHandlerProps> = ({
   return null;
 };
 
-MapEventHandler  = memo(MapEventHandler)
+MapEventHandler = memo(MapEventHandler);
 
 export default MapEventHandler;

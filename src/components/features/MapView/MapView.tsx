@@ -2,19 +2,18 @@ import { FC, useReducer, useCallback } from "react";
 import { GridLayout, RoutesList, Map } from "@app/components";
 import { LatLngTuple } from "leaflet";
 import { Line } from "@app/models";
-import { mapReducer, initialState, MapActionTypes } from './mapReducer';
+import { mapReducer, initialState, MapActionTypes } from "./mapReducer";
 
 /**
  * MapView - A component for displaying a map with a side menu, manages the map and its related functionalities.
- * 
- * This component uses a reducer to manage the state of the map, including the lines, 
- * points, and whether the user is in drawing mode. It renders the map and the list of 
+ *
+ * This component uses a reducer to manage the state of the map, including the lines,
+ * points, and whether the user is in drawing mode. It renders the map and the list of
  * routes (lines) and provides functionality for adding, selecting, and deleting lines.
- * 
+ *
  * @example
  *   <MapView />
  */
-
 
 const MapView: FC = () => {
   const [state, dispatch] = useReducer(mapReducer, initialState);
