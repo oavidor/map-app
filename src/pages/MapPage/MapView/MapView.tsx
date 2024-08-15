@@ -1,6 +1,6 @@
 import { FC, useCallback, useState } from "react";
-import { GridLayout, RoutesList, Map } from "../../../components";
-import { Line } from "../../../models";
+import { GridLayout, RoutesList, Map } from "@app/components";
+import { Line } from "@app/models";
 
 const MapView: FC = () => {
   const [selectedLineId, setSelectedLineId] = useState<string | undefined>(

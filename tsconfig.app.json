@@ -21,10 +21,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "baseUrl": ".",  // Ensure this is relative to the root of your project
+    "baseUrl": "src",
     "paths": {
-      "@app": ["src"],
-      "@app/*": ["src/*"],
+      "@app/*": ["*"],
+      "@app/components/*": ["components/*"]
     }
   },
   "include": ["src"]

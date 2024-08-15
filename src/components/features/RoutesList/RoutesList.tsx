@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ListItemButton from "@mui/material/ListItemButton";
-import { Line } from "../../../models";
+import { Line } from "@app/models";
 import styles from "./RoutesList.module.css";
 
 interface RoutesListProps {

@@ -10,7 +10,6 @@
     "preview": "vite preview",
     "start": "vite",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
-
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
@@ -28,6 +27,7 @@
     "@eslint/js": "^9.8.0",
     "@types/leaflet": "^1.9.12",
     "@types/lodash": "^4.17.7",
+    "@types/node": "^22.3.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

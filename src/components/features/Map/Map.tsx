@@ -2,7 +2,7 @@ import { FC, useState, useCallback, memo } from "react";
 import { MapContainer, TileLayer, Polyline, useMapEvents } from "react-leaflet";
 import { LatLngExpression, LatLngTuple } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { Line } from "../../../models";
+import { Line } from "@app/models";
 import _ from "lodash";
 import { Box } from "@mui/material";
 
