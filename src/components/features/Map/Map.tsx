@@ -6,6 +6,25 @@ import { Line } from "@app/models";
 import _ from "lodash";
 import { Box } from "@mui/material";
 
+/**
+* Map - A component that renders a map with lines and allows users to draw and select lines.
+*
+* @prop {Line[]} lines - An array of line objects to be displayed on the map.
+* @prop {string} [selectedLine] - The ID of the currently selected line.
+* @prop {function} onSelectLine - Callback function that gets called when a line is selected.
+* @prop {function} onAddLine - Callback function that gets called when a new line is drawn and added.
+* @prop {function} onDeleteLine - Callback function that gets called when a line is deleted.
+* 
+* @example
+*   <Map
+*     lines={lines}
+*     selectedLine="1"
+*     onSelectLine={handleSelectLine}
+*     onAddLine={handleAddLine}
+*     onDeleteLine={handleDeleteLine}
+*   />
+*/
+
 const SELECTED_COLOR = { color: "Fuchsia" };
 const LINE_COLOR = { color: "purple" };
 const DRAW_LINE_COLOR = { color: "blue" };

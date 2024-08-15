@@ -13,6 +13,24 @@ import ListItemButton from "@mui/material/ListItemButton";
 import { Line } from "@app/models";
 import styles from "./RoutesList.module.css";
 
+/**
+* RoutesList - Displays a list of the objects that are drawn on the map
+*
+* @prop {Line[]} items - An array of line objects to display in the list.
+* @prop {string} [selectedRoute] - The ID of the currently selected line.
+* @prop {function} onSelectRoute - Callback function that gets called when a line is selected.
+* @prop {function} onDeleteRoute - Callback function that gets called when a line is deleted.
+* 
+* @example
+*   <RoutesList
+*     items={lines}
+*     selectedRoute="1"
+*     onSelectRoute={handleSelectRoute}
+*     onDeleteRoute={handleDeleteRoute}
+*   />
+*/
+
+
 interface RoutesListProps {
   readonly items: Line[];
   readonly selectedRoute?: string;
