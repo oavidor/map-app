@@ -1,30 +1,33 @@
-import { FC, useState, useCallback, memo } from "react";
-import { MapContainer, TileLayer, Polyline, useMapEvents } from "react-leaflet";
+import { FC, useCallback, memo } from "react";
+import { MapContainer, TileLayer, Polyline } from "react-leaflet";
 import { LatLngExpression, LatLngTuple } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Line } from "@app/models";
-import _ from "lodash";
 import { Box } from "@mui/material";
+import MapEventHandler from "./MapEventHandler";
 
 /**
-* Map - A component that renders a map with lines and allows users to draw and select lines.
-*
-* @prop {Line[]} lines - An array of line objects to be displayed on the map.
-* @prop {string} [selectedLine] - The ID of the currently selected line.
-* @prop {function} onSelectLine - Callback function that gets called when a line is selected.
-* @prop {function} onAddLine - Callback function that gets called when a new line is drawn and added.
-* @prop {function} onDeleteLine - Callback function that gets called when a line is deleted.
-* 
-* @example
-*   <Map
-*     lines={lines}
-*     selectedLine="1"
-*     onSelectLine={handleSelectLine}
-*     onAddLine={handleAddLine}
-*     onDeleteLine={handleDeleteLine}
-*   />
-*/
-
+ * Map - A component that renders a map with lines (using react-leaflet lib) and allows users to draw and select lines.
+ *
+ * @param {Line[]} lines - An array of line objects to be displayed on the map.
+ * @param {string} [selectedLine] - The ID of the currently selected line.
+ * @param {function} onSelectLine - Callback function that gets called when a line is selected.
+ * @param {function} onAddLine - Callback function that gets called when a new line is drawn and added.
+ * @param {LatLngExpression[]} points - Array of points that form the current line being drawn.
+ * @param {function} updatePoints - Function to add a new point to the current line.
+ * @param {boolean} isDrawing - Flag to indicate if the drawing mode is active.
+ *
+ * @example
+ *   <Map
+ *     lines={lines}
+ *     selectedLine="1"
+ *     onSelectLine={handleSelectLine}
+ *     onAddLine={handleAddLine}
+ *     points={points}
+ *     updatePoints={handleUpdatePoints}
+ *     isDrawing={true}
+ *   />
+ */
 const SELECTED_COLOR = { color: "Fuchsia" };
 const LINE_COLOR = { color: "purple" };
 const DRAW_LINE_COLOR = { color: "blue" };
@@ -34,51 +37,20 @@ interface MapProps {
   selectedLine?: string;
   onSelectLine: (selected: Line) => void;
   onAddLine: (newLine: Line) => void;
-  onDeleteLine: (deleted: Line) => void;
+  points: LatLngExpression[];
+  updatePoints: (newPoint: LatLngTuple) => void;
+  isDrawing: boolean;
 }
 
-let Map: FC<MapProps> = ({ lines, selectedLine, onSelectLine, onAddLine }) => {
-  const [points, setPoints] = useState<LatLngExpression[]>([]);
+let Map: FC<MapProps> = ({ lines, selectedLine, onSelectLine, onAddLine, points, updatePoints, isDrawing, }) => {
 
-  const MapEventHandler = () => {
-    useMapEvents({
-      click(e) {
-        const newPoint: LatLngTuple = [e.latlng.lat, e.latlng.lng];
-
-        // Check if the point already exists
-        const pointExists = _.some(points, (point) =>
-          _.isEqual(point, newPoint),
-        );
-
-        if (!pointExists) {
-          setPoints(
-            (prevPoints) => [...prevPoints, newPoint] as LatLngExpression[],
-          );
-        } else {
-          console.log("Point already exists:", newPoint);
-        }
-      },
-      dblclick() {
-        if (points.length >= 2) {
-          const newLine: Line = {
-            id: `${lines.length + 1}`,
-            name: `Line ${lines.length + 1}`,
-            type: "LineString",
-            points: points,
-          };
-          onAddLine(newLine);
-          setPoints([]); // Clear points after drawing is finished
-        }
-      },
-    });
-    return null;
-  };
-
-  const handleLineClick = useCallback(
+  const handleLineSelect = useCallback(
     (line: Line) => {
-      onSelectLine(line);
+      if (!isDrawing) {
+        onSelectLine(line);
+      }
     },
-    [onSelectLine],
+    [onSelectLine, isDrawing],
   );
 
   return (
@@ -104,12 +76,19 @@ let Map: FC<MapProps> = ({ lines, selectedLine, onSelectLine, onAddLine }) => {
               positions={line.points}
               pathOptions={pathOption}
               eventHandlers={{
-                click: () => handleLineClick(line),
+                click: () => handleLineSelect(line),
               }}
             />
           );
         })}
-        <MapEventHandler />
+          {isDrawing && (
+          <MapEventHandler
+            points={points}
+            updatePoints={updatePoints}
+            lines={lines}
+            onAddLine={onAddLine}
+          />
+        )}
       </MapContainer>
     </Box>
   );

@@ -7,6 +7,7 @@ import {
   Box,
   ListItem,
   Typography,
+  Button,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -14,21 +15,25 @@ import { Line } from "@app/models";
 import styles from "./RoutesList.module.css";
 
 /**
-* RoutesList - Displays a list of the objects that are drawn on the map
-*
-* @prop {Line[]} items - An array of line objects to display in the list.
-* @prop {string} [selectedRoute] - The ID of the currently selected line.
-* @prop {function} onSelectRoute - Callback function that gets called when a line is selected.
-* @prop {function} onDeleteRoute - Callback function that gets called when a line is deleted.
-* 
-* @example
-*   <RoutesList
-*     items={lines}
-*     selectedRoute="1"
-*     onSelectRoute={handleSelectRoute}
-*     onDeleteRoute={handleDeleteRoute}
-*   />
-*/
+ * RoutesList - Displays a list of the objects that are drawn on the map and provides controls to manage them.
+ *
+ * @param {Line[]} items - An array of line objects to display in the list.
+ * @param {string} [selectedRoute] - The ID of the currently selected line.
+ * @param {function} onSelectRoute - Callback function that gets called when a line is selected.
+ * @param {function} onDeleteRoute - Callback function that gets called when a line is deleted.
+ * @param {function} onStartDrawing - Callback function that toggles drawing mode.
+ * @param {boolean} isDrawing - A flag indicating whether the drawing mode is active.
+ *
+ * @example
+ *   <RoutesList
+ *     items={lines}
+ *     selectedRoute="1"
+ *     onSelectRoute={handleSelectRoute}
+ *     onDeleteRoute={handleDeleteRoute}
+ *     onStartDrawing={handleStartDrawing}
+ *     isDrawing={false}
+ *   />
+ */
 
 
 interface RoutesListProps {
@@ -36,6 +41,8 @@ interface RoutesListProps {
   readonly selectedRoute?: string;
   readonly onSelectRoute: (selected: Line) => void;
   readonly onDeleteRoute: (selected: Line) => void;
+  readonly onStartDrawing: () => void;
+  isDrawing: boolean;
 }
 
 let RoutesList: FC<RoutesListProps> = ({
@@ -43,6 +50,8 @@ let RoutesList: FC<RoutesListProps> = ({
   selectedRoute,
   onSelectRoute,
   onDeleteRoute,
+  onStartDrawing,
+  isDrawing
 }) => {
   const handleClick = useCallback(
     (item: Line) => {
@@ -61,14 +70,20 @@ let RoutesList: FC<RoutesListProps> = ({
 
   return (
     <List className={styles.list} >
-      <ListItem>
+      <ListItem
+      secondaryAction={
+        <Button color="primary" onClick={onStartDrawing} sx={{textTransform: 'capitalize'}} variant="contained" >
+         {isDrawing ? 'Cancel Drawing' :  'Add Drawing' }
+        </Button>
+      }
+      >
         <Typography
           variant="h6"
           component="div"
           className={styles.title}
           sx={{fontWeight: 'bold'}}
         >
-          Items List
+          Routes
         </Typography>
       </ListItem>
       <Divider />
@@ -90,8 +105,9 @@ let RoutesList: FC<RoutesListProps> = ({
                   edge="end"
                   aria-label="delete"
                   onClick={(event) => handleOnDelete(event, item)}
+                  disabled={isDrawing}
                 >
-                  <DeleteIcon color="error" />
+                  <DeleteIcon color={isDrawing ? "disabled" : "error"} />
                 </IconButton>
               </ListItemButton>
             </Box>
