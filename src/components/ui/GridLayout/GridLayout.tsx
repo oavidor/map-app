@@ -1,5 +1,6 @@
 import { FC, memo, ReactNode } from "react";
 import { Box } from "@mui/material";
+import styles from "./GridLayout.module.css"; // Import the CSS Module
 
 interface LayoutProps {
   readonly mainViewColumns?: number;
@@ -8,8 +9,7 @@ interface LayoutProps {
 
 let GridLayout: FC<LayoutProps> = ({ children, mainViewColumns = 2 }) => (
   <Box
-    sx={{ display: "grid", flex: "1%" }}
-    className="grid flex-1 scrollable-children"
+    className={styles.gridContainer}
     gridTemplateColumns={`1fr ${mainViewColumns}fr`}
   >
     {children}

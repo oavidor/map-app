@@ -4,6 +4,7 @@ import { LatLngExpression, LatLngTuple } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Line } from "../../../models";
 import _ from "lodash";
+import { Box } from "@mui/material";
 
 const SELECTED_COLOR = { color: "Fuchsia" };
 const LINE_COLOR = { color: "purple" };
@@ -62,7 +63,7 @@ let Map: FC<MapProps> = ({ lines, selectedLine, onSelectLine, onAddLine }) => {
   );
 
   return (
-    <div style={{ height: "calc(100vh - 64px)" }}>
+    <Box sx={{ height: "calc(100vh - 64px)" }}>
       <MapContainer
         center={[51.505, -0.09]}
         zoom={13}
@@ -91,7 +92,7 @@ let Map: FC<MapProps> = ({ lines, selectedLine, onSelectLine, onAddLine }) => {
         })}
         <MapEventHandler />
       </MapContainer>
-    </div>
+    </Box>
   );
 };
 

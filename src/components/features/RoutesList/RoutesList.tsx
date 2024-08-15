@@ -11,6 +11,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import ListItemButton from "@mui/material/ListItemButton";
 import { Line } from "../../../models";
+import styles from "./RoutesList.module.css";
 
 interface RoutesListProps {
   readonly items: Line[];
@@ -41,12 +42,13 @@ let RoutesList: FC<RoutesListProps> = ({
   );
 
   return (
-    <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+    <List className={styles.list} >
       <ListItem>
         <Typography
           variant="h6"
           component="div"
-          sx={{ fontWeight: "bold", textAlign: "left", width: "100%" }}
+          className={styles.title}
+          sx={{fontWeight: 'bold'}}
         >
           Items List
         </Typography>
@@ -57,9 +59,9 @@ let RoutesList: FC<RoutesListProps> = ({
           <p>No items to display</p>
         </ListItem>
       ) : (
-        <Box sx={{ height: "60vh" }}>
+        <Box className={styles.listHeight} >
           {items.map((item) => (
-            <Box key={item.id} sx={{ display: "flex", alignItems: "center" }}>
+            <Box key={item.id}  className={styles.listItem}>
               <ListItemButton
                 sx={{ flex: 1 }}
                 selected={selectedRoute === item.id}

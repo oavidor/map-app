@@ -1,0 +1,10 @@
+
+.gridContainer {
+  display: grid;
+  flex: 1%;
+  overflow: hidden;
+  > * {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}

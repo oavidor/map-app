@@ -1,5 +1,5 @@
 .layout {
   margin: 0 auto;
-  /* padding: 1rem 1.5rem; */
   text-align: left;
+  height: calc(100vh - 64px);
 }
