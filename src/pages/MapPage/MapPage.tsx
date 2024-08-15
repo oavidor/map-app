@@ -1,5 +1,5 @@
 import { FC } from "react";
-import MapView from "./MapView/MapView";
+import { MapView } from "@app/components";
 
 const MapPage: FC = () => <MapView />;
 
