@@ -1,2 +1,2 @@
 export { default as MapPage } from "./MapPage/MapPage";
-export { default as MapView } from "./MapPage/MapView/MapView";
+export { default as MapView } from "../components/features/MapView/MapView";
